@@ -17,7 +17,7 @@ const User = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const baseUrl = `http://localhost:9091/contacts/${1}`;
+      const baseUrl = `api/contacts/${1}`;
       const resp = await axios.get(baseUrl);
       setUsers(resp.data);
       setFilteredUsers(resp.data);
@@ -31,7 +31,7 @@ const User = () => {
 
   const fetchSortedUsers = async (order) => {
     try {
-      const baseUrl = `http://localhost:9091/contacts${order}`;
+      const baseUrl = `api/contacts${order}`;
       const resp = await axios.get(baseUrl);
       setUsers(resp.data);
       setFilteredUsers(resp.data);
@@ -58,7 +58,7 @@ const User = () => {
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
-      const baseUrl = `http://localhost:9091/serch?query=${searchQuery}`;
+      const baseUrl = `api/serch?query=${searchQuery}`;
       const resp = await axios.get(baseUrl);
       setUsers(resp.data);
       setFilteredUsers(resp.data);
@@ -85,7 +85,7 @@ const User = () => {
   // Save the updated user
   const handleSaveEdit = async () => {
     try {
-      const resp = await axios.put(`http://localhost:9091/update/${updatedUser.id}`, updatedUser);
+      const resp = await axios.put(`api/update/${updatedUser.id}`, updatedUser);
       setUsers((prevUsers) =>
         prevUsers.map((user) => (user.id === updatedUser.id ? resp.data : user))
       );
@@ -102,7 +102,7 @@ const User = () => {
   // Handle Delete User
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http:localhost:9091/delete/1 ${id}`);
+      await axios.delete(`api/delete/1 ${id}`);
       setUsers(users.filter((user) => user.id !== id)); // Remove deleted user from the list
       setFilteredUsers(filteredUsers.filter((user) => user.id !== id)); // Update filtered list
     } catch (error) {

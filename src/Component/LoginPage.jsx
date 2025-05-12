@@ -17,7 +17,7 @@ const Add_User = () => {
     e.preventDefault();
     setLoading(true); 
     try {
-      const response = await axios.post('http://localhost:8080/auth', user);
+      const response = await axios.post('api/auth', user);
       console.log('Response:', response.data);
      
       if(response.data=="ok"){

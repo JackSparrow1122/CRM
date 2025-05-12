@@ -18,7 +18,7 @@ const SingUp = () => {
       const submit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post('http://localhost:9091/user', user);
+          const response = await axios.post('api/user', user);
           console.log('Response:', response.data);
           window.location.href = '/login';
           alert('User Added Successfully!');

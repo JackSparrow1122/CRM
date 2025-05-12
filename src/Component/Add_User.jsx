@@ -19,7 +19,7 @@ const Add_User = (userId) => {
     e.preventDefault();
     try {
       setContacts([...contacts, contact]);
-      const response = await axios.post(`http://localhost:9091/contact/${userId=1}`, contact); 
+      const response = await axios.post(`api/${userId=1}`, contact); 
       console.log('Response:', response.data);
       alert('User Added Successfully!');
       setContact({
