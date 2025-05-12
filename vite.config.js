@@ -6,7 +6,14 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: '0.0.0.0',  // Listens on all network interfaces, allowing access from other devices
-    port: 5186,        // Optional: Use the desired port for the Vite server
+    host: '0.0.0.0',   // Listens on all network interfaces, allowing access from other devices
+    port: 5186,         // Optional: Use the desired port for the Vite server
+    proxy: {
+      '/api': {
+        target: 'contactmbackend-production.up.railway.app',  // Replace with your backend API URL
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });
