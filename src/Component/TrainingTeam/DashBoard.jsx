@@ -99,10 +99,10 @@ export default function CRM() {
     try {
       const [assignmentsRes, trainersRes, subjectsRes, collegesRes] =
         await Promise.all([
-          fetch("https://crm-backend-production-ceba.up.railway.app//getAssi"),
-          fetch("https://crm-backend-production-ceba.up.railway.app//gettrainers"),
-          fetch("https://crm-backend-production-ceba.up.railway.app//getsubject"),
-          fetch("https://crm-backend-production-ceba.up.railway.app//getcolleges"),
+          fetch("https://crm-backend-production-ad67.up.railway.app/getAssi"),
+          fetch("https://crm-backend-production-ad67.up.railway.app/gettrainers"),
+          fetch("https://crm-backend-production-ad67.up.railway.app/getsubject"),
+          fetch("https://crm-backend-production-ad67.up.railway.app/getcolleges"),
         ]);
 
       if (
