@@ -16,7 +16,7 @@ export default function CollegeManagement() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://crm-backend-production-ad67.up.railway.app1/getcolleges");
+      const res = await fetch("https://crm-backend-production-ad67.up.railway.app1/getcolleges");
       if (!res.ok) throw new Error("Failed to fetch colleges");
       const data = await res.json();
       setColleges(data);
@@ -43,7 +43,7 @@ export default function CollegeManagement() {
       return;
     }
     try {
-      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app1/updatecollege/${editingId}`, {
+      const res = await fetch(`https://crm-backend-production-ad67.up.railway.app1/updatecollege/${editingId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: formName, location: formLocation }),
@@ -76,7 +76,7 @@ export default function CollegeManagement() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this college?")) return;
     try {
-      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app1/deleteCollege/${id}`, {
+      const res = await fetch(`https://crm-backend-production-ad67.up.railway.app1/deleteCollege/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete college");
@@ -109,7 +109,7 @@ export default function CollegeManagement() {
     }
 
     try {
-      const res = await fetch("http://crm-backend-production-ad67.up.railway.app1/addCollege", {
+      const res = await fetch("https://crm-backend-production-ad67.up.railway.app1/addCollege", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCollege),

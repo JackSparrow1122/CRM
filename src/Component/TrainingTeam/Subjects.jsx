@@ -15,7 +15,7 @@ export default function SubjectManagement() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://crm-backend-production-ad67.up.railway.app/getsubject");
+      const res = await fetch("https://crm-backend-production-ad67.up.railway.app/getsubject");
       if (!res.ok) throw new Error("Failed to fetch subjects");
       const data = await res.json();
       setSubjects(data);
@@ -41,7 +41,7 @@ export default function SubjectManagement() {
       return;
     }
     try {
-      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app/updateSubject/${editingId}`, {
+      const res = await fetch(`https://crm-backend-production-ad67.up.railway.app/updateSubject/${editingId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subjectName: formName }),
@@ -72,7 +72,7 @@ export default function SubjectManagement() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this subject?")) return;
     try {
-      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app/deletesubject/${id}`, {
+      const res = await fetch(`https://crm-backend-production-ad67.up.railway.app/deletesubject/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete subject");
@@ -104,7 +104,7 @@ export default function SubjectManagement() {
     }
 
     try {
-      const res = await fetch("http://crm-backend-production-ad67.up.railway.app/addSubject", {
+      const res = await fetch("https://crm-backend-production-ad67.up.railway.app/addSubject", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newSubject),
