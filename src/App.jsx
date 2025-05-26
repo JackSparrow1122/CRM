@@ -1,33 +1,20 @@
-import React from 'react'
-import ParentProvider from './ParentProvider'
-import Add_User from './Component/Add_User'
-import User from './Component/User'
-import Home from './Component/Home'
-import ContactManager from './Component/ContactManager'
-const App = () => {
-  
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import SalesDashboard from "./pages/Sales";
+import TrainingDashboard from "./pages/Training";
+import PlacementDashboard from "./pages/Placement";
+
+function App() {
   return (
-    <div>
-      {/* <Demo/> */}
-      {/* <ControllComponent></ControllComponent> */}
-      {/* <ParentProvider>
-        <Child/>
-      </ParentProvider> */}
-      {/* <Add_User/> */}
-      {/* <User/> */}
-      <ContactManager/>
-      {/* <Register/> */}
-      {/* <MyForm/> */}
-      {/* <FetchEmp/> */}
-      
-
- 
-  
-    
-    
-    </div>
-
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/sales-dashboard" element={<SalesDashboard />} />
+        <Route path="/training-dashboard" element={<TrainingDashboard />} />
+        <Route path="/placement-dashboard" element={<PlacementDashboard />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
