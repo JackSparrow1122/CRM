@@ -24,10 +24,10 @@ const Assignment = () => {
       setLoading(true);
       try {
         const [assiRes, trainersRes, subjectsRes, collegesRes] = await Promise.all([
-          axios.get("http://localhost:8081/getAssi"),
-          axios.get("http://localhost:8081/gettrainers"),
-          axios.get("http://localhost:8081/getsubject"),
-          axios.get("http://localhost:8081/getcolleges"),
+          axios.get("http://crm-backend-production-ad67.up.railway.app/getAssi"),
+          axios.get("http://crm-backend-production-ad67.up.railway.app/gettrainers"),
+          axios.get("http://crm-backend-production-ad67.up.railway.app/getsubject"),
+          axios.get("http://crm-backend-production-ad67.up.railway.app/getcolleges"),
         ]);
 
         setAssignments(assiRes.data);
@@ -61,7 +61,7 @@ const Assignment = () => {
     };
 
     try {
-      await axios.post("http://localhost:8081/addAssi", payload);
+      await axios.post("http://crm-backend-production-ad67.up.railway.app/addAssi", payload);
       setNewAssignment({
         trainerId: "",
         subjectId: "",
@@ -70,7 +70,7 @@ const Assignment = () => {
         endDate: "",
         fees: "",
       });
-      const res = await axios.get("http://localhost:8081/getAssi");
+      const res = await axios.get("http://crm-backend-production-ad67.up.railway.app/getAssi");
       setAssignments(res.data);
     } catch (error) {
       console.error("Error adding assignment:", error);
@@ -83,8 +83,8 @@ const Assignment = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:8081/deleteAssi/${id}`);
-      const res = await axios.get("http://localhost:8081/getAssi");
+      await axios.delete(`http://crm-backend-production-ad67.up.railway.app/deleteAssi/${id}`);
+      const res = await axios.get("http://crm-backend-production-ad67.up.railway.app/getAssi");
       setAssignments(res.data);
     } catch (error) {
       console.error("Error deleting assignment:", error);

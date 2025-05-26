@@ -20,7 +20,7 @@ export default function TrainerManagement() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:8081/gettrainers");
+      const res = await fetch("http://crm-backend-production-ad67.up.railway.app/gettrainers");
       if (!res.ok) throw new Error("Failed to fetch trainers");
       const data = await res.json();
       setTrainers(data);
@@ -42,7 +42,7 @@ export default function TrainerManagement() {
   const handleUpdate = async () => {
     if (!formName.trim()) return alert("Please enter trainer name");
     try {
-      const res = await fetch(`http://localhost:8081/updatetrainer/${editingId}`, {
+      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app/updatetrainer/${editingId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: formName }),
@@ -64,7 +64,7 @@ export default function TrainerManagement() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this trainer?")) return;
     try {
-      const res = await fetch(`http://localhost:8081/deleteTrainer/${id}`, {
+      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app/deleteTrainer/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete trainer");
@@ -91,7 +91,7 @@ export default function TrainerManagement() {
     }
 
     try {
-      const res = await fetch("http://localhost:8081/addtrainers", {
+      const res = await fetch("http://crm-backend-production-ad67.up.railway.app/addtrainers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTrainer),
