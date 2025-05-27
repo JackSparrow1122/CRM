@@ -185,7 +185,7 @@ export default function CRM() {
           className="mt-auto pt-3 border-t border-white cursor-pointer text-[#f37021] font-semibold text-lg select-none"
           onClick={() => {
             setLoggedIn(false);
-            window.location.href = "https://https://crm-zeta-wheat.vercel.app/"; // <== 🟠 CHANGE THIS LINK
+            window.location.href = "https://crm-zeta-wheat.vercel.app/"; // <== 🟠 CHANGE THIS LINK
           }}
         >
           Logout
