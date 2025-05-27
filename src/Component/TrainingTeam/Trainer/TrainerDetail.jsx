@@ -81,7 +81,7 @@ function AssignmentComponent({ email }) {
       setError(null);
       try {
         const encodedEmail = encodeURIComponent(email);
-        const res = await fetch(`http://crm-backend-production-ad67.up.railway.app/auth/${encodedEmail}`);
+        const res = await fetch(`https://crm-backend-production-ad67.up.railway.app/auth/${encodedEmail}`);
         if (!res.ok) throw new Error("Failed to fetch assignments");
         const data = await res.json();
         setAssignments(data);
@@ -176,7 +176,7 @@ export default function CRM() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://crm-backend-production-ad67.up.railway.app/auth/${encodeURIComponent(email)}`);
+      const res = await fetch(`https://crm-backend-production-ad67.up.railway.app/auth/${encodeURIComponent(email)}`);
       if (!res.ok) throw new Error("Failed to fetch assignments");
       const data = await res.json();
       setCount(Array.isArray(data) ? data.length : 0);

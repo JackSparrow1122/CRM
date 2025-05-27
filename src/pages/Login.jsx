@@ -35,7 +35,7 @@ const Login = () => {
       // If not dummy user, then assume trainer and call backend
       try {
         const res = await fetch(
-          `http://crm-backend-production-ad67.up.railway.app/authentication?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+          `https://crm-backend-production-ad67.up.railway.app/authentication?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
           {
             method: "POST",
           }
