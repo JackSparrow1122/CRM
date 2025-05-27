@@ -151,7 +151,7 @@ function AssignmentComponent({ email }) {
                     : "N/A"}
                 </td>
                 <td className="py-3 px-6 text-gray-800">
-                  {assgn.fees ? `$${assgn.fees}` : "N/A"}
+                  {assgn.fees ? `Rs.${assgn.fees}` : "N/A"}
                 </td>
               </tr>
             ))}
