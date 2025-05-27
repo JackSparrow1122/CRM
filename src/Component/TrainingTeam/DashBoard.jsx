@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
-import logo from "../../assets/large.png";
+// import logo from "../../assets/large.png";
 import Login from "../../pages/Login";
 import Trainer from "../../Component/TrainingTeam/Trainer";
 import Subject from "../../Component/TrainingTeam/Subjects";
@@ -163,7 +163,7 @@ export default function CRM() {
       {/* Sidebar */}
       <div className="bg-black text-white w-56 h-screen p-5 flex flex-col font-sans">
         <div className="flex items-center gap-3 mb-10 justify-center font-bold text-2xl text-[#134C93]">
-          <img src={logo} alt="Logo" className="w-10 h-10" />
+          {/* <img src={logo} alt="Logo" className="w-10 h-10" /> */}
           <span>CRM</span>
         </div>
 

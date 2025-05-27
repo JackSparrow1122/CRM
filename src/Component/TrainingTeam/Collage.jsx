@@ -107,7 +107,6 @@ export default function CollegeManagement() {
       setError("Please fill in both fields");
       return;
     }
-
     try {
       const res = await fetch("https://crm-backend-production-ad67.up.railway.app/addCollege", {
         method: "POST",
