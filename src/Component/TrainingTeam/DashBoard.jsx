@@ -22,13 +22,12 @@ const tabs = ["Dashboard", "Trainer", "Subjects", "College", "Assignment"];
 
 function CountCard({ title, count }) {
   return (
-<div className="bg-white p-3 rounded-xl shadow-md w-full max-w-[160px] sm:max-w-[180px] md:max-w-[160px] text-center">
-  <div className="text-4xl font-bold text-[#134C93]">{count}</div>
-  <div className="text-lg font-semibold mt-2 break-words whitespace-normal">
-    {title}
-  </div>
-</div>
-
+    <div className="bg-white p-3 rounded-xl shadow-md w-full max-w-[160px] sm:max-w-[180px] md:max-w-[160px] text-center">
+      <div className="text-4xl font-bold text-[#134C93]">{count}</div>
+      <div className="text-lg font-semibold mt-2 break-words whitespace-normal">
+        {title}
+      </div>
+    </div>
   );
 }
 
@@ -72,11 +71,11 @@ function Dashboard({ counts }) {
   return (
     <div>
       <h2 className="text-[#134C93] text-2xl font-bold mb-6">Dashboard Overview</h2>
-      <div className="flex flex-wrap  gap-5 mb-8 justify-center md:justify-start">
-        <CountCard  title="Assignments" count={counts.assignments ?? "..."} />
-        <CountCard  title="Trainers" count={counts.trainers ?? "..."} />
-        <CountCard  title="Subjects" count={counts.subjects ?? "..."} />
-        <CountCard  title="Colleges" count={counts.colleges ?? "..."} />
+      <div className="flex flex-wrap gap-5 mb-8 justify-center md:justify-start">
+        <CountCard title="Assignments" count={counts.assignments ?? "..."} />
+        <CountCard title="Trainers" count={counts.trainers ?? "..."} />
+        <CountCard title="Subjects" count={counts.subjects ?? "..."} />
+        <CountCard title="Colleges" count={counts.colleges ?? "..."} />
       </div>
 
       <div className="bg-white p-5 rounded-xl shadow-md max-w-3xl mx-auto">
@@ -181,9 +180,13 @@ export default function CRM() {
           ))}
         </div>
 
+        {/* Logout */}
         <div
           className="mt-auto pt-3 border-t border-white cursor-pointer text-[#f37021] font-semibold text-lg select-none"
-          onClick={() => setLoggedIn(false)}
+          onClick={() => {
+            setLoggedIn(false);
+            window.location.href = "https://https://crm-zeta-wheat.vercel.app/"; // <== 🟠 CHANGE THIS LINK
+          }}
         >
           Logout
         </div>
