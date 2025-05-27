@@ -14,6 +14,7 @@ export default function TrainerManagement() {
     email: "",
     phoneNumber: "",
     address: "",
+    password: "", // ✅ Password field added
   });
 
   const fetchTrainers = async () => {
@@ -77,7 +78,13 @@ export default function TrainerManagement() {
   const openAddModal = () => setShowAddModal(true);
   const closeAddModal = () => {
     setShowAddModal(false);
-    setNewTrainer({ name: "", email: "", phoneNumber: "", address: "" });
+    setNewTrainer({
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      password: "", // ✅ Reset password
+    });
   };
 
   const handleNewTrainerChange = (e) => {
@@ -85,8 +92,8 @@ export default function TrainerManagement() {
   };
 
   const handleAddTrainer = async () => {
-    const { name, email, phoneNumber, address } = newTrainer;
-    if (!name.trim() || !email.trim() || !phoneNumber.trim() || !address.trim()) {
+    const { name, email, phoneNumber, address, password } = newTrainer;
+    if (!name.trim() || !email.trim() || !phoneNumber.trim() || !address.trim() || !password.trim()) {
       return alert("Please fill in all fields");
     }
 
@@ -127,10 +134,7 @@ export default function TrainerManagement() {
         <p>No trainers found.</p>
       ) : (
         trainers.map((trainer) => (
-          <div
-            key={trainer.id}
-            className="flex justify-between items-center border-b py-3"
-          >
+          <div key={trainer.id} className="flex justify-between items-center border-b py-3">
             {editingId === trainer.id ? (
               <div className="flex flex-col md:flex-row gap-3 w-full">
                 <input
@@ -217,11 +221,19 @@ export default function TrainerManagement() {
               onChange={handleNewTrainerChange}
             />
             <input
-              className="w-full p-2 border rounded-md mb-4"
+              className="w-full p-2 border rounded-md mb-3"
               type="text"
               name="address"
               placeholder="Address"
               value={newTrainer.address}
+              onChange={handleNewTrainerChange}
+            />
+            <input
+              className="w-full p-2 border rounded-md mb-4"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={newTrainer.password}
               onChange={handleNewTrainerChange}
             />
 

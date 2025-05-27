@@ -1,81 +1,103 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bgImage from '../assets/react.svg';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  // Dummy users except trainer (trainer will be authenticated from backend)
+  const users = [
+    { email: "sales@123.com", password: "1234", role: "sales" },
+    { email: "training@123.com", password: "1234", role: "training" },
+    { email: "placement@123.com", password: "1234", role: "placement" },
+  ];
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // 🔐 Hardcoded users
-    const users = [
-      { email: "sales@123.com", password: "1234", role: "sales" },
-      { email: "training@123.com", password: "1234", role: "training" },
-      { email: "placement@123.com", password: "1234", role: "placement" },
-    ];
-
-    const user = users.find((u) => u.email === email && u.password === password);
+    // Check if email is one of dummy users first
+    const user = users.find((u) => u.email === email);
 
     if (user) {
-      // Store role in localStorage (or you can use context)
-      localStorage.setItem("role", user.role);
+      // If found in dummy users, check password locally
+      if (user.password === password) {
+        localStorage.setItem("role", user.role);
+        localStorage.setItem("email", user.email);
 
-      // Navigate to respective dashboards
-      if (user.role === "sales") navigate("/sales-dashboard");
-      else if (user.role === "training") navigate("/training-dashboard");
-      else if (user.role === "placement") navigate("/placement-dashboard");
+        if (user.role === "sales") navigate("/sales-dashboard");
+        else if (user.role === "training") navigate("/training-dashboard");
+        else if (user.role === "placement") navigate("/placement-dashboard");
+      } else {
+        alert("Invalid credentials");
+      }
     } else {
-      alert("Invalid credentials");
+      // If not dummy user, then assume trainer and call backend
+      try {
+        const res = await fetch(
+          `http://crm-backend-production-ad67.up.railway.app/authentication?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+          {
+            method: "POST",
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await res.json();
+        console.log("Backend response:", data);
+
+        if (data === true) {
+          localStorage.setItem("role", "trainer");
+          localStorage.setItem("email", email);
+          navigate("/trainer-dashboard");
+        } else {
+          alert("Invalid trainer credentials");
+        }
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
     }
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative px-4"
-      style={{
-        backgroundImage: `url(${bgImage})`,
-      }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
-
-      {/* Login Card */}
-      <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl shadow-xl px-8 py-10 w-full max-w-md space-y-6">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white p-6 rounded shadow-md max-w-md w-full"
+      >
+        <h2 className="text-2xl mb-4 text-center font-bold text-[#134C93]">
           Login to Your Account
         </h2>
-        <form onSubmit={handleLogin} className="space-y-2">
-          <div>
-            <label className="block text-white text-sm mb-2">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
-            />
-          </div>
-          <div>
-            <label className="block text-white text-sm mb-2">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-300"
-          >
-            Login
-          </button>
-        </form>
-      </div>
+
+        <label className="block mb-2">Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full mb-4 p-2 border rounded"
+          placeholder="Enter your email"
+        />
+
+        <label className="block mb-2">Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="w-full mb-6 p-2 border rounded"
+          placeholder="Enter your password"
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-[#134C93] text-white py-2 rounded hover:bg-[#0f3c6a]"
+        >
+          Login
+        </button>
+      </form>
     </div>
   );
 };
